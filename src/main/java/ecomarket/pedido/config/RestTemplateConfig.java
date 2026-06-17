@@ -1,4 +1,4 @@
-package ecomarket.pedido_ms.config;
+package ecomarket.pedido.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package ecomarket.pedido_ms.service;
+package ecomarket.pedido.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,14 +10,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import ecomarket.pedido_ms.model.CarroDTO;
-import ecomarket.pedido_ms.model.Direccion;
-import ecomarket.pedido_ms.model.EstadoPedido;
-import ecomarket.pedido_ms.model.ItemCarroDTO;
-import ecomarket.pedido_ms.model.ItemPedido;
-import ecomarket.pedido_ms.model.Pedido;
-import ecomarket.pedido_ms.repository.DireccionRepository;
-import ecomarket.pedido_ms.repository.PedidoRepository;
+import ecomarket.pedido.model.CarroDTO;
+import ecomarket.pedido.model.Direccion;
+import ecomarket.pedido.model.EstadoPedido;
+import ecomarket.pedido.model.ItemCarroDTO;
+import ecomarket.pedido.model.ItemPedido;
+import ecomarket.pedido.model.Pedido;
+import ecomarket.pedido.repository.DireccionRepository;
+import ecomarket.pedido.repository.PedidoRepository;
+
 
 @Service
 public class PedidoService {

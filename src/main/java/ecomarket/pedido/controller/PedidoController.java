@@ -1,4 +1,4 @@
-package ecomarket.pedido_ms.controller;
+package ecomarket.pedido.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ecomarket.pedido_ms.model.EstadoPedido;
-import ecomarket.pedido_ms.model.Pedido;
-import ecomarket.pedido_ms.service.PedidoService;
+import ecomarket.pedido.model.EstadoPedido;
+import ecomarket.pedido.model.Pedido;
+import ecomarket.pedido.service.PedidoService;
 
 @RestController
 @RequestMapping("/api/v1/pedidos")

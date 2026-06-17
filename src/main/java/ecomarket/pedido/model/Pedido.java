@@ -1,4 +1,4 @@
-package ecomarket.pedido_ms.model;
+package ecomarket.pedido.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,9 +1,10 @@
-package ecomarket.pedido_ms.repository;
+package ecomarket.pedido.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import ecomarket.pedido_ms.model.Direccion;
+import ecomarket.pedido.model.Direccion;
+
 
 @Repository
 public interface DireccionRepository extends JpaRepository<Direccion, Long> {

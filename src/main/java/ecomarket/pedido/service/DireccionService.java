@@ -1,4 +1,4 @@
-package ecomarket.pedido_ms.service;
+package ecomarket.pedido.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ecomarket.pedido_ms.model.Direccion;
-import ecomarket.pedido_ms.repository.DireccionRepository;
+import ecomarket.pedido.model.Direccion;
+import ecomarket.pedido.repository.DireccionRepository;
+
 
 @Service
 public class DireccionService {

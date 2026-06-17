@@ -1,4 +1,4 @@
-package ecomarket.pedido_ms.model;
+package ecomarket.pedido.model;
 
 public enum EstadoPedido {
     PENDIENTE,
