@@ -1,16 +1,23 @@
 package ecomarket.pedido_ms.model;
 
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Embeddable
 public class Direccion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDireccion;
+
     private String calle;
     private String numero;
     private String region;
