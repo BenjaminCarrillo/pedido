@@ -155,4 +155,11 @@ public class PedidoControllerTest {
         mockMvc.perform(delete("/api/v1/pedidos/1"))
                 .andExpect(status().isNoContent());
     }
+    @Test
+    void testEliminarPedidoFallaDevuelve404() throws Exception {
+        Mockito.doThrow(new RuntimeException("no existe"))
+                .when(pedidoService).eliminarPedido(99L);
+        mockMvc.perform(delete("/api/v1/pedidos/99"))
+                .andExpect(status().isNotFound());
+}
 }

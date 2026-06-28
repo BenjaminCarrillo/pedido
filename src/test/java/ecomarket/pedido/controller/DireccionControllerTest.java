@@ -119,4 +119,14 @@ public class DireccionControllerTest {
         mockMvc.perform(delete("/api/v1/direcciones/1"))
                 .andExpect(status().isNoContent());
     }
+    @Test
+    void testPostDireccionFallaDevuelve409() throws Exception {
+        Direccion nueva = new Direccion(null, "Calle 1", "123", "RM", "Santiago", "Providencia", 8320000);
+        Mockito.when(direccionService.guardarDireccion(any(Direccion.class)))
+                .thenThrow(new RuntimeException("error al guardar"));
+        mockMvc.perform(post("/api/v1/direcciones")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(nueva)))
+                .andExpect(status().isConflict());
+    }
 }

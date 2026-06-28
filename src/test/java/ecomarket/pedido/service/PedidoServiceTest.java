@@ -97,7 +97,7 @@ public class PedidoServiceTest {
     @Test
     void testCrearPedidoCarroVacioDevuelveNull() {
         CarroDTO carro = new CarroDTO();
-        carro.setItems(new ArrayList<>()); // sin items
+        carro.setItems(new ArrayList<>());
 
         when(restTemplate.getForObject(anyString(), eq(CarroDTO.class))).thenReturn(carro);
 
@@ -206,4 +206,29 @@ public class PedidoServiceTest {
         pedidoService.eliminarPedido(1L);
         verify(pedidoRepository).deleteById(1L);
     }
+
+    @Test
+    void testCrearPedidoCuandoDescontarStockFalla() {
+        CarroDTO carro = carroConUnItem();
+        when(restTemplate.getForObject(anyString(), eq(CarroDTO.class))).thenReturn(carro);
+        org.mockito.Mockito.doThrow(new RuntimeException("inventario caido"))
+            .when(restTemplate).put(anyString(), any());
+            when(pedidoRepository.save(any(Pedido.class))).thenAnswer(inv -> inv.getArgument(0));
+        Pedido resultado = pedidoService.crearPedidoDesdeCarro(7L, null);
+            assertThat(resultado).isNotNull();
+            assertThat(resultado.getItems()).hasSize(1);
+    }
+
+    @Test
+void testCrearPedidoCarroConItemsNullDevuelveNull() {
+    CarroDTO carro = new CarroDTO();
+    carro.setItems(null); 
+
+    when(restTemplate.getForObject(anyString(), eq(CarroDTO.class))).thenReturn(carro);
+
+    Pedido resultado = pedidoService.crearPedidoDesdeCarro(7L, 1L);
+
+    assertThat(resultado).isNull();
+    verify(pedidoRepository, never()).save(any(Pedido.class));
+}
 }
