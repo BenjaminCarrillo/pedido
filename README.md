@@ -15,6 +15,8 @@ Microservicio encargado de la gestión de **pedidos** del sistema EcoMarket. Con
 | RestTemplate | Comunicación síncrona con el microservicio de Carro |
 | Base de datos | MySQL (producción) / H2 en memoria (tests) |
 | Lombok | Para reducir código repetitivo (getters, setters, constructores) |
+| Bean Validation | `spring-boot-starter-validation` — valida el cuerpo de las peticiones (`@NotBlank`, `@Size`, `@Positive`, etc.) |
+| springdoc-openapi | `springdoc-openapi-starter-webmvc-ui` (2.7.0) — documentación interactiva de la API (Swagger UI) |
 | Maven | Gestión de dependencias y build (incluye wrapper `mvnw`) |
 
 ---
@@ -105,6 +107,15 @@ java -jar target/pedido-0.0.1-SNAPSHOT.jar
 
 Base URL: `http://localhost:8093`
 
+### Documentación interactiva (Swagger UI)
+
+El servicio expone la documentación OpenAPI de forma interactiva. Con la aplicación corriendo:
+
+- **Swagger UI**: `http://localhost:8093/doc/swagger-ui.html`
+- **Especificación OpenAPI (JSON)**: `http://localhost:8093/v3/api-docs`
+
+Desde ahí se pueden explorar y probar todos los endpoints sin necesidad de un cliente externo.
+
 ### Pedidos — `/api/v1/pedidos`
 
 | Método | Ruta | Descripción | Respuestas |
@@ -137,8 +148,8 @@ PUT http://localhost:8093/api/v1/pedidos/1/estado?estado=ENVIADO
 |---|---|---|---|
 | GET | `/api/v1/direcciones` | Lista todas las direcciones | 200 / 204 |
 | GET | `/api/v1/direcciones/{id}` | Obtiene una dirección por id | 200 / 204 |
-| POST | `/api/v1/direcciones` | Crea una dirección | 201 / 409 |
-| PUT | `/api/v1/direcciones/{id}` | Actualiza una dirección | 200 / 404 |
+| POST | `/api/v1/direcciones` | Crea una dirección | 201 / 400 / 409 |
+| PUT | `/api/v1/direcciones/{id}` | Actualiza una dirección | 200 / 400 / 404 |
 | DELETE | `/api/v1/direcciones/{id}` | Elimina una dirección | 204 |
 
 ```json
@@ -151,6 +162,8 @@ PUT http://localhost:8093/api/v1/pedidos/1/estado?estado=ENVIADO
   "codigoPostal": 8320000
 }
 ```
+
+El cuerpo se valida antes de guardar: `calle`, `numero`, `region`, `ciudad` y `comuna` son obligatorios (`calle` máx. 100 caracteres, `numero` máx. 20) y `codigoPostal` debe ser un entero positivo. Si algún campo no cumple, el servicio responde **400 (Bad Request)** con el mensaje de validación correspondiente.
 
 ---
 
